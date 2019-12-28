@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <title>Socket.IO chat</title>
+</head>
+
+
+<body>
+    <p>Merhaba</p>
+    <p id="mesp"> </li>
+    <div>
+        <form class="send-message" action='#'>
+            <div class="input-group mb-3" style="margin-top: 300px;">
+                <input type="text" class="form-control" id="input" placeholder="Message" aria-describedby="button-addon2">
+            </div>
+            <button type="submit" class="btn btn-primary">Gönder</button>
+        </form>
+    </div>
+
+
+
+</body>
+<script src="/socket.io/socket.io.js"></script>
+<script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+
+<script>
+    (function (win, doc) {
+        var socket = win.io();
+        doc.querySelector('.send-message').onsubmit = sendMessage;
+
+        function sendMessage() {
+            socket.emit('message', doc.getElementById("input").value)
+            socket.on('post-msg',(msg)=>{doc.getElementById("mesp").innerHTML=(msg);})
+            
+        }
+       
+       
+        
+    })(window, document);
+
+</script>
+
+
+</html>
